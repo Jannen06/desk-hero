@@ -19,7 +19,8 @@ NUM_EPISODES=100
 
 # Choose your policy (uncomment one):
 # High resolution / more training steps (best results)
-POLICY_PATH="lorenz-k/desk-hero31-50k"
+#POLICY_PATH="lorenz-k/desk-hero31-50k"
+POLICY_PATH="Nikhil-Ravi/act_desk-hero"
 # Medium training (faster inference)
 # POLICY_PATH="lorenz-k/desk-hero31-20k"
 # SmolVLA policy (experimental)
