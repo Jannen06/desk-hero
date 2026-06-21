@@ -236,6 +236,8 @@ lerobot-train \
 
 **Hugging Face Hackathon Berlin 2025 - Team 1**
 
+![The team](docs/team.jpeg)
+
 | # | Name | GitHub | Background | Role |
 |---|---|---|---|---|
 | 1 | Lorenz Krapp | [@lorenz-k](https://github.com/lorenz-k) | Computer Science | Calibration, training, inference |
