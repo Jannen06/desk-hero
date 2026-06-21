@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# LeRobot outputs
+outputs/
+
+# HuggingFace cache
+.cache/
+
+# Calibration files (machine specific)
+*.json
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Videos and large media
+*.mp4
+*.avi
+*.mov
+media/*.gif
+
+# Dataset cache
+data/.venv/

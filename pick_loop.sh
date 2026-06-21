@@ -1,45 +1,55 @@
 #!/bin/bash
-# Continuous pick-and-place loop for SO-101
-# Press Ctrl+C to stop between episodes
-
-POLICY_PATH="jan024/pen_to_holder_act"
-ROBOT_PORT="/dev/ttyACM0"
-CALIB_DIR="/home/jannen/.cache/huggingface/lerobot/calibration"
-EPISODE_DURATION=15  # seconds per pick attempt
-RESET_PAUSE=5        # seconds to reset the scene between picks
+# Desk Hero - Continuous Pick-and-Place Loop
+# Uses lerobot-record with policy inference for autonomous pen picking
+# Press Ctrl+C to stop
 
 # Unset ROS environment pollution
 unset PYTHONPATH
 unset AMENT_PREFIX_PATH
 
-# Activate venv
-source ~/Documents/Jannen/Berlin\ Hackathon/lerobot/.venv/bin/activate
+# ============================================================
+# Configuration - change these to match your setup
+# ============================================================
+ROBOT_PORT="/dev/ttyACM0"
+ROBOT_ID="follower_arm"
+WRIST_CAM_INDEX=4
+OVERHEAD_CAM_INDEX=2
+EPISODE_DURATION=30
+NUM_EPISODES=100
 
-echo "Starting continuous pick-and-place loop"
-echo "Place pen on desk, then press Enter to begin each episode"
-echo "Press Ctrl+C anytime to stop"
+# Choose your policy (uncomment one):
+# High resolution / more training steps (best results)
+POLICY_PATH="lorenz-k/desk-hero31-50k"
+# Medium training (faster inference)
+# POLICY_PATH="lorenz-k/desk-hero31-20k"
+# SmolVLA policy (experimental)
+# POLICY_PATH="amrit97/pen_to_holder_final_act"
+
+# ============================================================
+# Run inference loop
+# ============================================================
+
+echo "============================================"
+echo "  Desk Hero - Autonomous Pen Organizer"
+echo "============================================"
+echo ""
+echo "Policy:   $POLICY_PATH"
+echo "Robot:    $ROBOT_PORT ($ROBOT_ID)"
+echo "Cameras:  wrist=$WRIST_CAM_INDEX, overhead=$OVERHEAD_CAM_INDEX"
+echo "Duration: ${EPISODE_DURATION}s per episode"
+echo ""
+echo "Place a pen on the desk and press Enter to start."
+echo "Press Ctrl+C to stop at any time."
 echo ""
 
-pick_count=0
-
-while true; do
-    pick_count=$((pick_count + 1))
-    echo "=== Episode $pick_count ==="
-    echo "Place a pen on the desk and press Enter..."
-    read -r
-
-    echo "Running rollout for ${EPISODE_DURATION}s..."
-    lerobot-rollout \
-        --policy.type act \
-        --policy.pretrained_path "$POLICY_PATH" \
-        --robot.type=so101_follower \
-        --robot.id=follower \
-        --robot.port="$ROBOT_PORT" \
-        --robot.calibration_dir="$CALIB_DIR" \
-        --robot.cameras='{"overhead": {"type": "opencv", "index_or_path": 4, "width": 640, "height": 480, "fps": 30, "fourcc": "MJPG"}, "wrist": {"type": "opencv", "index_or_path": 6, "width": 640, "height": 480, "fps": 30}}' \
-        --duration "$EPISODE_DURATION"
-
-    echo "Episode $pick_count done. Resetting in ${RESET_PAUSE}s..."
-    sleep "$RESET_PAUSE"
-    echo ""
-done
+lerobot-record \
+  --robot.type=so101_follower \
+  --robot.port="$ROBOT_PORT" \
+  --robot.id="$ROBOT_ID" \
+  --robot.cameras="{\"wrist\": {\"type\": \"opencv\", \"index_or_path\": $WRIST_CAM_INDEX, \"width\": 640, \"height\": 480, \"fps\": 30, \"fourcc\": \"MJPG\"}, \"overhead\": {\"type\": \"opencv\", \"index_or_path\": $OVERHEAD_CAM_INDEX, \"width\": 640, \"height\": 480, \"fps\": 30, \"fourcc\": \"MJPG\"}}" \
+  --policy.path="$POLICY_PATH" \
+  --dataset.repo_id=lorenz-k/eval_desk-hero-merged4 \
+  --dataset.single_task="Pick and place the pen in the cup" \
+  --dataset.num_episodes="$NUM_EPISODES" \
+  --dataset.episode_time_s="$EPISODE_DURATION" \
+  --dataset.push_to_hub=false

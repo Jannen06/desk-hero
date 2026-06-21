@@ -1,0 +1,19 @@
+# Desk Hero - Requirements
+#
+# Core framework: LeRobot v0.5.2
+# Install via: uv pip install -e ".[pusht,viz,smolvla]"
+# from the LeRobot repo: https://github.com/Jannen06/lerobot
+#
+# The packages below are extras on top of LeRobot's own dependencies.
+
+# Keyboard control during recording
+pynput
+
+# HuggingFace Hub CLI
+huggingface_hub[cli]
+
+# Visualization (Rerun)
+rerun-sdk
+
+# Python version requirement
+# python_requires>=3.12
