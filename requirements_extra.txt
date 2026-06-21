@@ -1,0 +1,15 @@
+# LeRobot Hackathon - Extra Requirements
+# 
+# IMPORTANT: This file only lists extras beyond LeRobot itself.
+# The main install is done via: uv pip install -e ".[pusht,viz,smolvla]"
+# which pulls in PyTorch, CUDA, gym-pusht, rerun-sdk, SmolVLA, etc.
+#
+# Full setup steps:
+#   1. curl -LsSf https://astral.sh/uv/install.sh | sh
+#   2. uv venv --python 3.12
+#   3. source .venv/bin/activate
+#   4. uv pip install -e ".[pusht,viz,smolvla]"
+#   5. uv pip install -r requirements_extra.txt
+#   6. hf auth login
+
+pynput
