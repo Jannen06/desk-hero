@@ -5,6 +5,10 @@
 
 A robot arm that autonomously picks up pens from your desk and places them into a cup holder using imitation learning.
 
+[demo Video](https://drive.google.com/file/d/1VMK3gp58UHpjGLzznWbwR9mIphW0xWJV/view?usp=sharing)
+
+[demo youtube](https://youtu.be/SOPR04bkV5k)
+
 ![Workspace Setup](docs/lerobot_desk_hero.jpeg)
 
 ---
