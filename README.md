@@ -1,17 +1,21 @@
 # Desk Hero - Autonomous Pen Organizer
 
-> **Berlin Robotics x AI Hackathon 2025**
+> **Berlin Robotics x AI Hackathon 2026**
 > Hugging Face "Desk Hero" Track
 
 A robot arm that autonomously picks up pens from your desk and places them into a cup holder using imitation learning.
 
-[demo Video](https://drive.google.com/file/d/1VMK3gp58UHpjGLzznWbwR9mIphW0xWJV/view?usp=sharing)
+[![Demo Video](docs/thumbnail.png)](https://www.youtube.com/watch?v=SOPR04bkV5k)
+
 
 [demo youtube](https://youtu.be/SOPR04bkV5k)
 
+---
+
+### Overview
 ![Workspace Setup](docs/lerobot_desk_hero.jpeg)
 
----
+
 
 ## The Problem
 
@@ -64,7 +68,7 @@ We trained multiple checkpoints with increasing steps:
 | Checkpoint | Steps | Performance |
 |---|---|---|
 | `lorenz-k/desk-hero31-20k` | 20,000 | Reaches toward pen, sometimes grasps |
-| `lorenz-k/desk-hero31-50k` | 50,000 | Reliable pick and place, our best model |
+| `jan024/desk-hero31-50k` | 50,000 | Reliable pick and place, our best model |
 
 ### Dataset evolution
 
@@ -96,7 +100,7 @@ We recorded data in three sessions as we improved our technique:
 | Resource | Link |
 |---|---|
 | Dataset (merged, 50 episodes) | [jan024/desk-hero-merged-new](https://huggingface.co/datasets/jan024/desk-hero-merged-new) |
-| ACT Policy (50k steps, best) | [lorenz-k/desk-hero31-50k](https://huggingface.co/lorenz-k/desk-hero31-50k) |
+| ACT Policy (50k steps, best) | [jan024/desk-hero31-50k](https://huggingface.co/jan024/desk-hero31-50k) |
 | ACT Policy (20k steps) | [lorenz-k/desk-hero31-20k](https://huggingface.co/lorenz-k/desk-hero31-20k) |
 | ACT Policy (10k steps) | [amrit97/pen_to_holder_final_act](https://huggingface.co/amrit97/pen_to_holder_final_act) |
 | SmolVLA Policy (experimental) | [jan024/pen_to_holder_final](https://huggingface.co/jan024/pen_to_holder_final) |
@@ -236,7 +240,7 @@ lerobot-train \
 
 **Hugging Face Hackathon Berlin 2025 - Team 1**
 
-![The team](docs/team.jpeg)
+![The team](docs/team.jpg)
 
 | # | Name | GitHub | Background | Role |
 |---|---|---|---|---|
